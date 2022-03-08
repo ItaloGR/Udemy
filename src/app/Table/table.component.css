@@ -1,0 +1,16 @@
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+table {
+    width: 100%;
+}
+cdk-virtual-scroll-viewport {
+    height: 100%;
+}
