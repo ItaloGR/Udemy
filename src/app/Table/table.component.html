@@ -1,18 +1,24 @@
-<cdk-virtual-scroll-viewport [itemSize]="20">
-<table>
-    <thead>
-        <th>id</th>
-        <th>Nome</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let row of tableData; trackBy: trackByFn">
-            <td>
-                {{row.id}}
-            </td>
-            <td>
-                {{row.nome}}
-            </td>
-        </tr>
-    </tbody>
-</table>
-</cdk-virtual-scroll-viewport>
+<div class="container">
+  <div class="box">
+    <cdk-virtual-scroll-viewport
+    [itemSize]=tamanhoLinha
+    [minBufferPx]="50"
+    [maxBufferPx]="200"
+    >
+      <table>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Nome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *cdkVirtualFor="let row of tableData; trackBy: trackByFn">
+            <td>{{row.id}}</td>
+            <td>{{row.nome}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</div>

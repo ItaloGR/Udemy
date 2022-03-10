@@ -6,7 +6,8 @@ import { Component , OnInit} from '@angular/core';
     styleUrls: ['./table.component.css']
 })
 export class TabelaComponent implements OnInit{
-    name = 'Tabela';
+
+    tamanhoLinha = '20'
 
     tableData = Array<any>();
 
