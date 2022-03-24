@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Coracao } from 'src/shared/coracao.model';
 
 @Component({
   selector: 'app-tentativas',
@@ -7,31 +8,23 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 })
 export class TentativasComponent implements OnInit, OnChanges {
 
-  coracaoCheio: string = "/assets/coracao_cheio.png";
-  coracaoVazio: string = "/assets/coracao_vazio.png";
+  chances: Coracao[];
 
-  chances: string[];
-
-  @Input() public total: number = 0;
-  @Input() public restante: number = 0;
+  @Input() public tentativas: number = 0;
 
   constructor() {
     this.chances = []
   }
 
   ngOnInit(): void {
-    for(let i = 0; i < this.total; i++){
-      this.chances.push(this.coracaoCheio)
+    for(let i = 0; i < this.tentativas; i++){
+      this.chances.push(new Coracao(true))
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes["restante"].previousValue != this.restante)
-      this.chances.map((_value: string, index: number)=>{
-          if((this.restante) < index+1)
-          this.chances[index] = this.coracaoVazio;
-        }
-    )
+    if(changes["tentativas"].previousValue != this.tentativas)
+      this.chances.map((_,index )=> this.chances[index].cheio = index < this.tentativas)
   }
 
 }

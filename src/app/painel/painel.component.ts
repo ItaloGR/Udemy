@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Frase } from 'src/shared/frases.model';
 import { FRASES } from './frases.mock';
 
@@ -20,18 +20,19 @@ export class PainelComponent implements OnInit {
   public progresso: number = 0;
   public progressoTotal: number = 0;
 
-  public tentativasTotal: number;
-  public tentativasRestantes: number;
+  public tentativas: number;
 
   public totalPerguntas: number;
+
+  @Output() public encerraJogo: EventEmitter<string> = new EventEmitter();
+
+
   constructor() { 
     this.totalPerguntas = this.frases.length
-    this.rodadaFrase = this.frases[this.rodada];
-    this.progresso = 100 / this.totalPerguntas;
+    this.tentativas = 3   
 
-    
-    this.tentativasTotal = this.totalPerguntas
-    this.tentativasRestantes = this.totalPerguntas
+    this.progresso = 100 / this.totalPerguntas;
+    this.rodadaFrase = this.frases[this.rodada];
   }
 
   ngOnInit(): void {
@@ -39,27 +40,27 @@ export class PainelComponent implements OnInit {
 
   atualizaResposta(input: Event): void{
     this.resposta = (input.target as HTMLInputElement).value
-    this.resposta = (<HTMLInputElement>input.target).value
   }
 
   verificaResposta(): void{
-    if(this.rodadaFrase.frasePtbr.toUpperCase() === this.resposta.toUpperCase())
+    if(this.rodadaFrase.frasePtbr.toUpperCase() === this.resposta.toUpperCase().trim())
     {
-      if(this.totalPerguntas = this.rodada)
+      if(this.totalPerguntas == this.rodada)
       {
-        alert('Very good!');
+        this.encerraJogo.emit('Very good!');
         return;
       }
       this.rodada++;
       this.rodadaFrase = this.frases[this.rodada];
       this.progressoTotal += this.progresso;
-      alert('Tradução correta')
+      this.resposta = ''
+
     }else{
-      this.tentativasRestantes--;
-      if(this.tentativasRestantes == 0)
+      this.tentativas--;
+      if(this.tentativas == -1)
       {
-        alert('Fim de jogo!');
-        window.location.reload();
+        this.encerraJogo.emit('Fim de jogo! Você perdeu todas as tentativas!');
+        return;
       }
 
       alert('Tradução errada')
