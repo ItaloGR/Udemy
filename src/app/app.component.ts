@@ -9,16 +9,23 @@ import { PainelComponent } from './painel/painel.component';
 })
 export class AppComponent implements AfterViewInit{
   
-  @ViewChild("MeuOvo") set appPainel(painel: PainelComponent)
-  {
-    painel.encerraJogo.emit = this.encerraJogoPrincipal;
-  };
+  public jogoEmAndamento: boolean = false;
+  public vitoria: boolean = false
+
+  // @ViewChild("Painel") set appPainel(painel: PainelComponent)
+  // {
+  //   painel.encerraJogo.emit = this.encerraJogoPrincipal;
+  // };
 
   ngAfterViewInit(){
-   // this.appPainel.encerraJogo.emit = this.encerraJogoPrincipal;
   }
 
   encerraJogoPrincipal(encerramento: string){
-    console.log(encerramento);
+    this.vitoria = (encerramento === 'vitoria');
+    this.jogoEmAndamento = false;    
+  }
+
+  reiniciajogo(){
+    this.jogoEmAndamento = true;
   }
 }

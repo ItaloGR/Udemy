@@ -47,8 +47,7 @@ export class PainelComponent implements OnInit {
     {
       if(this.totalPerguntas == this.rodada)
       {
-        this.encerraJogo.emit('Very good!');
-        return;
+        this.encerraJogo.emit('vitoria');
       }
       this.rodada++;
       this.rodadaFrase = this.frases[this.rodada];
@@ -59,11 +58,8 @@ export class PainelComponent implements OnInit {
       this.tentativas--;
       if(this.tentativas == -1)
       {
-        this.encerraJogo.emit('Fim de jogo! Você perdeu todas as tentativas!');
-        return;
+        this.encerraJogo.emit('derrota');
       }
-
-      alert('Tradução errada')
     }
   }
 }
