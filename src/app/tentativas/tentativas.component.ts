@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Coracao } from 'src/shared/coracao.model';
 
 @Component({
@@ -12,13 +13,15 @@ export class TentativasComponent implements OnInit, OnChanges {
 
   @Input() public tentativas: number = 0;
 
-  constructor() {
+  constructor(
+    @Inject(APP_BASE_HREF) private _baseHref: string 
+  ) {
     this.chances = []
   }
 
   ngOnInit(): void {
     for(let i = 0; i < this.tentativas; i++){
-      this.chances.push(new Coracao(true))
+      this.chances.push(new Coracao(true,this._baseHref))
     }
   }
 

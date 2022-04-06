@@ -9,13 +9,8 @@ import { PainelComponent } from './painel/painel.component';
 })
 export class AppComponent implements AfterViewInit{
   
-  public jogoEmAndamento: boolean = false;
+  public jogoEmAndamento: boolean = true;
   public vitoria: boolean = false
-
-  // @ViewChild("Painel") set appPainel(painel: PainelComponent)
-  // {
-  //   painel.encerraJogo.emit = this.encerraJogoPrincipal;
-  // };
 
   ngAfterViewInit(){
   }

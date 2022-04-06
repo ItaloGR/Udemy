@@ -45,15 +45,16 @@ export class PainelComponent implements OnInit {
   verificaResposta(): void{
     if(this.rodadaFrase.frasePtbr.toUpperCase() === this.resposta.toUpperCase().trim())
     {
+      this.progressoTotal += this.progresso;
+      this.rodada++;
+      this.resposta = ''
+
       if(this.totalPerguntas == this.rodada)
       {
         this.encerraJogo.emit('vitoria');
       }
-      this.rodada++;
+      
       this.rodadaFrase = this.frases[this.rodada];
-      this.progressoTotal += this.progresso;
-      this.resposta = ''
-
     }else{
       this.tentativas--;
       if(this.tentativas == -1)

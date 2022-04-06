@@ -99,6 +99,14 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "deploy-url":"/udemy-app1/",
+            "baseHref": "/udemy-app1/",
+            "repo": "https://github.com/ItaloGR/udemy-app1.git"            
+          }
         }
       }
     }
